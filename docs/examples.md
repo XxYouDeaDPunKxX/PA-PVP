@@ -241,6 +241,7 @@ Input:
 Invariants:
 - If PREV was `CLOSED` with `ct:REAL`: reopening without `<<<NEW_EVIDENCE>>>` is blocked.
 - If PREV was `CLOSED` with `ct:SIM`: reopening is allowed with either `<<<NEW_EVIDENCE>>>` or `<<<CHANGE>>>`.
+- If PREV indicates `reopen_total>=1` for the same `id`, reopening is blocked even if `<<<NEW_EVIDENCE>>>` is present (`trigger=REOPEN_BLOCKED_BUDGET`).
 - With `<<<NEW_EVIDENCE>>>`, evidence tier is reflected in binding and `ct:REAL` is allowed.
 - If PREV was `CLOSED` with `ct:REAL` and the item is reopened, Step 1 must be a mitigation/compensation step.
 
@@ -388,7 +389,7 @@ falsification_debt: NONE
 next_uncertainty: whether caps apply deterministically
 trigger: PROBE_ITERATION
 [DERIVED]
-derived_version: v9.7
+derived_version: v9.7.1
 item_exec_mode: SLOW
 terminal: NO
 closure_tier: -

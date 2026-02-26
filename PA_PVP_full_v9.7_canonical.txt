@@ -173,7 +173,7 @@ Definitions:
   - [PANEL]
   - [QUEUE]
   - one or more "[ITEM id=...]" blocks
-  - optional extra text after the code block (e.g., a derived human table); ignore it
+  - optional extra text after the code block (e.g., [HUMAN_TABLE]); ignore it (rendering-only; not SSOT; see [HUMAN_TABLE])
 
 Deterministic handling:
 1) If the raw user input contains a PREV_SNAPSHOT but contains NO <<<I ...>>> wrappers:
@@ -298,6 +298,7 @@ Purpose: allow humans to read while the model is streaming, without breaking cop
 Rules:
 - MUST be a standard markdown table placed AFTER the code block.
 - MUST be derived ONLY from [QUEUE] lines (no new semantics).
+- [HUMAN_TABLE] is human UI only. Models MUST NOT use it as SSOT or source of truth; analysis MUST rely only on the single code block.
 - MUST NOT be used as machine input; SNAPSHOT-AS-INPUT MUST ignore it.
 - Columns (exact, stable):
   - id | verdict | impact | urgency | ds | term | ct | gate | state | exp | next
@@ -563,6 +564,10 @@ CLOSED revisit rule (hard):
 - A CLOSED item MAY be reopened with the same id only under one of these deterministic conditions:
   - If ct=REAL: <<<NEW_EVIDENCE>>> is provided with evidence_tier in {HISTORICAL, REAL, EXPERIMENT}.
   - If ct=SIM: either <<<NEW_EVIDENCE>>> is provided (same tiers) OR <<<CHANGE>>> is provided.
+- Reopen budget cap (hard, anti-loop):
+  - If <<<PREV>>> exists and PREV indicates reopen_total>=1 for this id, reopening is BLOCKED even if the evidence/change condition is satisfied.
+  - If PREV is from an older ruleset and reopen_total is missing, treat it as 0.
+  - The item MUST remain CLOSED (no state change) and trigger=REOPEN_BLOCKED_BUDGET.
 - If the required evidence/change is missing:
   - Reopening is BLOCKED.
   - The item MUST remain CLOSED (no state change) and trigger=REOPEN_BLOCKED_NO_DELTA.
@@ -773,7 +778,7 @@ DOMINANT_GATE_MAP (SSOT, trigger -> gate):
 - If trigger=CIRCULAR_DEPENDENCY => REDESIGN_TRIGGER
 - If trigger=CONFIDENCE_CAP_APPLIED => CONFIDENCE_CAP
 - If trigger in {BLOCKED_EXTERNAL, EXTERNAL_DATA_REQUIRED, CLOSE_BLOCKED_REAL_ONLY} => EXTERNAL_BLOCK
-- If trigger in {REOPEN_BLOCKED_NO_DELTA, DUPLICATE_ID_REJECTED} => DEPENDENCY_BLOCK
+- If trigger in {REOPEN_BLOCKED_NO_DELTA, REOPEN_BLOCKED_BUDGET, DUPLICATE_ID_REJECTED} => DEPENDENCY_BLOCK
 - If trigger in {INVALID_DELTA, PROBE_STALL_CONTEXT_MATCH, REDESIGN_TRIGGER, MULTI_CRITICAL_DRIVER_SPLIT} => REDESIGN_TRIGGER
 - If trigger=SCORE_TRIAGE => SCORE_TRIAGE (reserved for explicit score/impact routing only)
 - Else => NONE
@@ -899,18 +904,19 @@ Optional (display-only):
 
 [DERIVED] (SHORT, DERIVED-ONLY)
 Must include:
-- derived_version: v9.7 (derivation ruleset id; audit compatibility)
+- derived_version: v9.7.1 (derivation ruleset id; audit compatibility)
 - item_exec_mode: OK | SLOW | NO_TOOL
 - terminal: YES | NO
 - closure_tier: SIMULATED | REAL | -
 - best_evidence_tier: SIMULATED | DERIVED | HISTORICAL | REAL | EXPERIMENT
 - events: [max 3] (derived event trace; allowed values below)
+- reopen_total: 0..N (derived, authoritative, anti-loop memory; MUST be present)
 - counters: (derived, path-dependency memory; no behavior change by itself; MAY be omitted under MIN_SURFACE)
 - effective_expire_days: N | NONE | PAUSED
 - output_mode: FULL | DELTA | COMPRESS
 Rules:
 - These fields MUST be derived only from short fields already present in the output (do not invent new semantics).
-- derived_version MUST be exactly "v9.7" for this canonical.
+- derived_version MUST be exactly "v9.7.1" for this canonical.
 - item_exec_mode MUST match [QUEUE] ds.
 - terminal MUST match [QUEUE] term.
 - closure_tier MUST match [QUEUE] ct (mapping: SIM->SIMULATED, REAL->REAL, "-"->"-").
@@ -928,6 +934,11 @@ best_evidence_tier derivation (deterministic):
   - if <<<PREV>>> exists and PREV contains best_evidence_tier: use that value, else
   - SIMULATED
 Order: SIMULATED < DERIVED < HISTORICAL < REAL < EXPERIMENT
+
+reopen_total derivation (deterministic, authoritative, anti-loop):
+- Let prev_ro = PREV.reopen_total if <<<PREV>>> exists and PREV includes it; else prev_ro=0.
+- If prev_state=CLOSED AND new_state is not CLOSED in this run: reopen_total = prev_ro + 1.
+- Else: reopen_total = prev_ro.
 
 Counters format (single line, derived, language-agnostic):
 - counters: tb=<timebox_total_m>/<timebox_budget_m> cx=<complexity_score>/<complexity_budget> pc=<probe_cycle_total> nm=<near_miss_total> nmd=<deterministic_near_miss_total> inc=<probe_inconclusive_total> ovr=<override_repr_total> rb=<reopen_block_total>
@@ -1757,6 +1768,34 @@ Executor SHOULD:
 - If multiple items are DO NOW:
   - execute in order of highest Impact, then highest Urgency, then highest Cost of Delay.
 - Feed execution outcomes back as REAL/EXPERIMENT evidence tiers on the next run.
+
+AUTO-REOPEN VALIDATOR (OPTION B, MECHANICAL, NO-LOOP)
+Goal: allow a fully automatic "reopen only when worth it" workflow without infinite ping-pong loops.
+This is a consumer-side contract that produces deterministic deltas that the kernel can accept under the CLOSED revisit rule.
+
+Trigger (structured signals only; do not use narrative):
+- A validator MAY run only for items where any of these is true in the pasted snapshot:
+  - contested=YES, OR
+  - falsification_debt!=NONE, OR
+  - missing_ratings=YES, OR
+  - critical_driver_confidence in {LOW, VERY LOW}.
+
+Validator action per item (hard):
+- The validator MUST choose exactly one of:
+  (A) PROPOSE_PROBE: propose exactly 1 probe step, timebox<=10m, with an observable output (binary or numeric threshold).
+  (B) NO_ACTION: do nothing for that item (no reopen attempt, no extra steps).
+- The validator MUST NOT directly reopen an item by narrative. Reopen is only legal via <<<NEW_EVIDENCE>>> / <<<CHANGE>>> per the kernel rule.
+
+Probe outcome binding (hard):
+- If the proposed probe is executed and produces FAIL (or crosses the declared numeric threshold):
+  - the next kernel run MUST include <<<NEW_EVIDENCE evidence_tier=EXPERIMENT>>> for that item containing the probe result as an observable artifact/log.
+- If the probe produces PASS:
+  - do not reopen; no new evidence is required.
+
+No-loop enforcement (kernel-backed, hard):
+- Reopen MUST be attempted at most once per item id:
+  - If PREV.reopen_total>=1, reopening is BLOCKED by the kernel with trigger=REOPEN_BLOCKED_BUDGET (even if NEW_EVIDENCE is provided).
+  - After reopen is blocked by budget, the validator MAY still set contested=YES and/or open falsification_debt, but MUST NOT attempt to reopen again.
 
 GENERAL RULES
 - Verdict cannot be "depends".

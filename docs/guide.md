@@ -28,6 +28,7 @@ Each run returns:
 
 For human scanning, the output also includes a derived markdown table (`[HUMAN_TABLE]`) after the code block.
 The `[QUEUE]` and `[HUMAN_TABLE]` lines include a `gate:` token (dominant gate) so you can see the primary blocker without opening item blocks.
+`[HUMAN_TABLE]` is UI-only: models must not treat it as SSOT or as machine input; analysis must rely on the single code block only.
 
 If it cannot produce an executable next action, the item is invalid (or must be discarded/parked).
 
@@ -151,6 +152,9 @@ Irreversibility safeguard:
 
 Reopen mitigation (REAL-closed items):
 - If an item was previously `CLOSED` with `ct:REAL` and is reopened due to new evidence, Step 1 must be a mitigation/compensation step (rollback/containment/compensation) before continuing execution.
+
+Anti-loop reopen cap (mechanical):
+- The kernel tracks `reopen_total` (derived, authoritative) and blocks reopening when `reopen_total>=1` with `trigger=REOPEN_BLOCKED_BUDGET`.
 
 Dynamic priorities (policy, via `<<<CHANGE>>>`):
 - When context changes (deadlines, constraints, scope), add a short `<<<CHANGE>>>` declaration so impact/urgency updates are explicit and reviewable across iterations.

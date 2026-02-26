@@ -114,7 +114,7 @@ Probe log margin fields (optional but structured):
 
 - `[USER_PANEL]`: human-readable summary at the top (derived-only, no new semantics)
 - `[PANEL]`: machine panel (short, strict)
-- `[HUMAN_TABLE]`: markdown table after the code block (derived-only from `[QUEUE]`, for human scanning)
+- `[HUMAN_TABLE]`: markdown table after the code block (derived-only from `[QUEUE]`, for human scanning; UI-only, must not be used as SSOT)
 - `[HUMAN_TABLE_OPS]`: optional second markdown table after `[HUMAN_TABLE]` (derived-only from `[QUEUE]` + `[ITEM_PANEL]` + `[DERIVED]` + `[PROBE_LOG]` when present)
 - `[RISK_DASHBOARD]`: optional derived-only risk hotspot table after `[HUMAN_TABLE]` (derived-only from `[QUEUE]` + `[ITEM_PANEL]` short fields)
 
@@ -169,6 +169,9 @@ Runtime exception output tokens (closed vocabulary, RUNTIME_OK only):
 - `inc=<probe_inconclusive_total>`
 - `ovr=<override_repr_total>`
 - `rb=<reopen_block_total>`
+
+Reopen anti-loop memory (derived, authoritative):
+- `reopen_total`: how many times the item has been reopened after being `CLOSED` (carried across `<<<PREV>>>`). When `reopen_total>=1`, reopening is blocked (`trigger=REOPEN_BLOCKED_BUDGET`).
 
 Counters are log-derived:
 - `counters:` is scan-only and may be omitted. If omitted, derive the same quantities from `[PROBE_LOG]` using the kernel definitions.
