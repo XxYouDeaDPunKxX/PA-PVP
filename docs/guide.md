@@ -16,9 +16,10 @@ PA_PVP has two ways to use it:
    - File: [PA_PVP_full_v9.7_canonical.txt](https://github.com/XxYouDeaDPunKxX/PA-PVP/blob/main/PA_PVP_full_v9.7_canonical.txt)
    - Use this when you want a deterministic, stateful, batch-safe AI-to-AI protocol.
 
-2) **Lite entrypoint (copy/paste template)**
-   - File: [PLUTONIUM_REVIEW.md](https://github.com/XxYouDeaDPunKxX/PA-PVP/blob/main/PLUTONIUM_REVIEW.md)
-   - Use this when you want the simplest template aligned with the current kernel.
+2) **Quickstart (copy/paste template)**
+   - File: [QUICKSTART.md](https://github.com/XxYouDeaDPunKxX/PA-PVP/blob/main/QUICKSTART.md)
+   - Use this when you want the simplest copy/paste workflow to run the kernel.
+   - Legacy alias (same purpose, older name): [PLUTONIUM_REVIEW.md](https://github.com/XxYouDeaDPunKxX/PA-PVP/blob/main/PLUTONIUM_REVIEW.md)
 
 ## What the kernel returns (always)
 Each run returns:

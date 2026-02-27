@@ -22,6 +22,9 @@ It turns a plan into:
 The full protocol text lives in the repo root:
 - [PA_PVP_full_v9.7_canonical.txt](https://github.com/XxYouDeaDPunKxX/PA-PVP/blob/main/PA_PVP_full_v9.7_canonical.txt)
 
-## Lite entrypoint
+## Quickstart
 If you want the simplest copy/paste entrypoint aligned with the current kernel, use:
+- [QUICKSTART.md](https://github.com/XxYouDeaDPunKxX/PA-PVP/blob/main/QUICKSTART.md)
+
+Legacy alias:
 - [PLUTONIUM_REVIEW.md](https://github.com/XxYouDeaDPunKxX/PA-PVP/blob/main/PLUTONIUM_REVIEW.md)
