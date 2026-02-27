@@ -1,7 +1,5 @@
 # PA_PVP Quickstart (copy/paste, no-look)
 
-License: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0). See `LICENSE`.
-
 SSOT (canonical kernel):
 - `PA_PVP_full_v9.7_canonical.txt`
 
@@ -64,3 +62,6 @@ Hard rules:
 - Glossary: `docs/glossary.md`
 - Examples pack: `docs/examples.md`
 
+## License
+
+Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0). See `LICENSE`.
