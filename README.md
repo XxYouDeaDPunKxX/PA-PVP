@@ -83,7 +83,6 @@ Docs and templates:
 - Glossary (closed vocabulary): [docs/glossary.md](docs/glossary.md)
 - Examples pack (validation): [docs/examples.md](docs/examples.md)
 - Quickstart: [QUICKSTART.md](QUICKSTART.md)
-- Legacy alias: [PLUTONIUM_REVIEW.md](PLUTONIUM_REVIEW.md)
 
 ---
 

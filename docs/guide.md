@@ -19,7 +19,6 @@ PA_PVP has two ways to use it:
 2) **Quickstart (copy/paste template)**
    - File: [QUICKSTART.md](https://github.com/XxYouDeaDPunKxX/PA-PVP/blob/main/QUICKSTART.md)
    - Use this when you want the simplest copy/paste workflow to run the kernel.
-   - Legacy alias (same purpose, older name): [PLUTONIUM_REVIEW.md](https://github.com/XxYouDeaDPunKxX/PA-PVP/blob/main/PLUTONIUM_REVIEW.md)
 
 ## What the kernel returns (always)
 Each run returns:
