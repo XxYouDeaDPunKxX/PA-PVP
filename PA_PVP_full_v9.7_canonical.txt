@@ -3,11 +3,7 @@ PA_PVP - A PLUTONIUM-LIKE ADVERSARIAL PEER VALIDATION PROTOCOL (CANONICAL v9.7)
 FILENAME: PA_PVP_full_v9.7_canonical.txt
 LICENSE: CC BY-SA 4.0
 
-STATE: SSOT.TEST.REVIEW
-
-NOTE: BRIDGE DOCUMENT.
-This file is intended to align with other SSOT instances (e.g., A.D.A.M) without creating conflicts.
-Do not treat this as SSOT.LOCK.FINAL unless explicitly promoted by the SSOT owner.
+NOTE: Governance-only bridge document (not part of the execution contract).
 
 WRITING STANDARD (KERNEL STYLE)
 - Plain standard text only (ASCII).
