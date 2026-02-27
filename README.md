@@ -97,6 +97,7 @@ Every valid run produces:
 - max five atomic steps
 
 No discussions. No "it depends" as output.
+We call it the "kernel" because of its internal structure: this choice is intentional to reduce drift and noise: one deterministic SSOT core enforces invariants and produces the state transition, while everything else (Quickstart, REPORT, orchestration policy) stays a consumer layer that must not change SSOT semantics.
 
 ### Output structure (stable)
 - Kernel decision runs: exactly ONE code block.
@@ -106,7 +107,7 @@ No discussions. No "it depends" as output.
   - optional `[HUMAN_TABLE_OPS]` (derived-only ops console)
   
 Consumer commands:
-- `REPORT` / `REPORT LITE` are derived-only human render passes and MUST NOT output any code blocks (see `docs/guide.md`).
+- `REPORT` / `REPORT LITE` are derived-only human render passes and MUST NOT output any code blocks (see [`docs/guide.md`](docs/guide.md)).
 
 ### Knobs (batch-level)
 - `exec_capability=NO_RUNTIME|RUNTIME_OK` (default `NO_RUNTIME`)
@@ -132,7 +133,7 @@ See: [docs/guide.md#askuser-always-none-until-you-need-it](docs/guide.md#askuser
 ---
 
 ## GitHub Pages
-This repo includes a mini-site in `docs/`.
+This repo includes a mini-site in [`docs/`](docs/).
 To publish: GitHub -> Settings -> Pages -> Source: Deploy from a branch -> Branch: `main` -> Folder: `/docs`.
 
 ## License
@@ -140,7 +141,7 @@ Unless otherwise noted, the contents of this repository are licensed under:
 
 - Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
 
-See `LICENSE` and `docs/license.md`.
+See [`LICENSE`](LICENSE) and [`docs/license.md`](docs/license.md).
 
 Attribution recipe (copy/paste):
 - Project: PA_PVP - a PLUTONIUM-like Adversarial Peer Validation Protocol

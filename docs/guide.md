@@ -20,6 +20,8 @@ PA_PVP has two ways to use it:
    - File: [QUICKSTART.md](https://github.com/XxYouDeaDPunKxX/PA-PVP/blob/main/QUICKSTART.md)
    - Use this when you want the simplest copy/paste workflow to run the kernel.
 
+We call it the "kernel" because of its internal structure: this choice is intentional to reduce drift and noise: one deterministic SSOT core enforces invariants and produces the state transition, while everything else (Quickstart, REPORT, orchestration policy) stays a consumer layer that must not change SSOT semantics.
+
 ## What the kernel returns (always)
 Each run returns:
 - a forced verdict: `DO NOW` / `DO LATER` / `DISCARD`

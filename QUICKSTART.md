@@ -1,7 +1,7 @@
 # PA_PVP Quickstart (copy/paste, no-look)
 
 SSOT (canonical kernel):
-- `PA_PVP_full_v9.7_canonical.txt`
+- [`PA_PVP_full_v9.7_canonical.txt`](PA_PVP_full_v9.7_canonical.txt)
 
 This quickstart is a human wrapper. The kernel SSOT is always the canonical file above.
 
@@ -58,10 +58,10 @@ Hard rules:
 
 ## Next steps
 
-- Guide: `docs/guide.md`
-- Glossary: `docs/glossary.md`
-- Examples pack: `docs/examples.md`
+- Guide: [`docs/guide.md`](docs/guide.md)
+- Glossary: [`docs/glossary.md`](docs/glossary.md)
+- Examples pack: [`docs/examples.md`](docs/examples.md)
 
 ## License
 
-Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0). See `LICENSE`.
+Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0). See [`LICENSE`](LICENSE).

@@ -509,7 +509,7 @@ Invariants:
 - A consumer can classify the item as `CONVERGED` / `SOFT_DIVERGENCE` / `HARD_DIVERGENCE` using:
   - verdict agreement
   - gate agreement (`gate:` token)
-  - overlap on the first 3 step tokens + `[NEXT]` token (see `docs/guide.md`).
+  - overlap on the first 3 step tokens + `[NEXT]` token (see [`docs/guide.md`](guide.md)).
 
 ## Example 14: RISK_DASHBOARD (derived-only, batch hotspots)
 
