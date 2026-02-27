@@ -132,10 +132,6 @@ See: [docs/guide.md#askuser-always-none-until-you-need-it](docs/guide.md#askuser
 
 ---
 
-## GitHub Pages
-This repo includes a mini-site in [`docs/`](docs/).
-To publish: GitHub -> Settings -> Pages -> Source: Deploy from a branch -> Branch: `main` -> Folder: `/docs`.
-
 ## License
 Unless otherwise noted, the contents of this repository are licensed under:
 

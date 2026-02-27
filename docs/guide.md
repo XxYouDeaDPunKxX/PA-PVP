@@ -355,6 +355,10 @@ Protocol changes should be tested with the Examples Pack:
 
 Run the same examples before/after and verify invariants still hold.
 
+## GitHub Pages (optional)
+This repo includes a mini-site in `docs/` (see [index.md](index.md)).
+To publish: GitHub -> Settings -> Pages -> Source: Deploy from a branch -> Branch: `main` -> Folder: `/docs`.
+
 Modeling guidance (policy):
 - Mutual exclusion: model alternatives inside the same item (options) or use a coordinator item; avoid cross-item auto-discard fields in the kernel.
 - Knowledge transfer: when an item is falsified, promote any validated probe outcomes into `<<<NEW_EVIDENCE>>>` for related items (or create a "lessons learned" item) instead of inventing sunk-cost math in the kernel.
