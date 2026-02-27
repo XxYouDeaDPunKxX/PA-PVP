@@ -97,7 +97,8 @@ Every valid run produces:
 - max five atomic steps
 
 No discussions. No "it depends" as output.
-We call it the "kernel" because of its internal structure: this choice is intentional to reduce drift and noise: one deterministic SSOT core enforces invariants and produces the state transition, while everything else (Quickstart, REPORT, orchestration policy) stays a consumer layer that must not change SSOT semantics.
+
+We call it the “kernel” because of its internal structure. This is an intentional choice to reduce drift and noise: a deterministic SSOT core enforces invariants and drives state transitions, while everything else (Quickstart, REPORT, orchestration policy) remains a consumer layer and must not alter SSOT semantics.
 
 ### Output structure (stable)
 - Kernel decision runs: exactly ONE code block.
