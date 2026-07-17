@@ -2,7 +2,7 @@
 
 Name: PA_PVP
 Subtitle: PLUTONIUM-like Adversarial Peer Validation Protocol
-Type: Copy/paste decision loop
+Type: Copy/paste adversarial decision protocol
 URL: https://xxyoudeadpunkxx.github.io/PA_PVP-a-PLUTONIUM-like-Adversarial-Peer-Validation-Protocol/
 Repository: https://github.com/XxYouDeaDPunKxX/PA_PVP-a-PLUTONIUM-like-Adversarial-Peer-Validation-Protocol
 License: CC BY-SA 4.0
@@ -11,59 +11,48 @@ Canonical protocol file: PA_PVP_full_v9.9.0_canonical.txt
 
 ## What this is
 
-PA_PVP is a copy/paste decision protocol for movement under uncertainty: clear verdicts, one executable next action, reality probes, bounded uncertainty, and less drift.
+PA_PVP turns uncertain plans, artifacts, choices, targets, and previous PA_PVP states into a forced verdict, one concrete next action, and reusable machine state.
 
-It is not a brainstorming prompt or motivational decision aid. It is a rule-bound decision loop that turns unresolved material into a verdict, a next action, and reusable state.
+It is not a brainstorming prompt, autonomous runtime, oracle, or certification.
 
 ## Operating line
 
-Close decisions. Keep moving. Doubt should generate motion, not delay.
+Doubt is not a blocker. It is a state transition.
 
-## Use case
+## Start
 
-Use PA_PVP when a plan, artifact, target, uncertain situation, or previous PA_PVP output needs pressure-testing and closure into a concrete next move.
+1. Load PA_PVP_full_v9.9.0_canonical.txt into the AI system.
+2. Instruct it: "Use PA_PVP as the active decision protocol for the next input. Follow its output contract exactly."
+3. Paste the plan, artifact, decision, target, or previous valid snapshot.
+4. Read the machine state and human table separately.
 
-## Canonical source
+## Inputs
 
-The canonical protocol file is:
-PA_PVP_full_v9.9.0_canonical.txt
+- PLAN
+- ARTIFACT
+- TOOL plus TARGET
+- normal-language decision or uncertain situation
+- previous valid PA_PVP snapshot
 
-Treat the repository as the live public source. Treat this file as the LLM-readable project index, not as the full protocol specification.
+## Outputs
 
-## Purpose
+A valid decision run returns:
 
-PA_PVP takes a plan, artifact, target, uncertain situation, or previous PA_PVP output and returns a verdict, one executable next action, and a state that can be pasted back later.
+- one verdict: DO NOW, DO LATER, or DISCARD
+- one concrete [NEXT] action
+- observable or measurable steps
+- evidence limits and unresolved state
+- one machine snapshot beginning with STATE: DECISION.TEST.FINAL
+- one derived human-readable table after the machine block
 
-## Use cases
-
-- reversible choice that still needs a clean next step
-- decision that will not close
-- plan that needs pressure-testing
-- artifact that needs validation
-- project with too many possible next steps
-- previous PA_PVP output to continue
-
-## Output surfaces
-
-A valid PA_PVP decision run gives two surfaces:
-
-- one machine snapshot in a single code block
-- one human table after the code block
-
-Machine snapshot markers include:
-
-- STATE: DECISION.TEST.FINAL
-- [QUEUE]
-- [NEXT]
-
-The code block is the machine state.
-The human table is for scanning and is not reusable machine state.
+The machine block is reusable state.
+The human table is not reusable machine state.
 
 ## Core verdicts
 
-- DO NOW
-- DO LATER
-- DISCARD
+- DO NOW: active, with an executable next move
+- DO LATER: parked until a condition, dependency, date, or evidence requirement changes
+- DISCARD: should not proceed under the current state
 
 ## Core states
 
@@ -75,60 +64,59 @@ The human table is for scanning and is not reusable machine state.
 - EXPIRED
 - DISCARDED
 
-## Loop
+## Continuation loop
 
-1. Paste a plan, artifact, target, or current PA_PVP state.
-2. Get the verdict and [NEXT].
-3. Execute, simulate, or inspect the next step.
-4. Paste the previous output back.
-5. PA_PVP continues from the state instead of restarting from zero.
+1. Paste an input or previous valid snapshot.
+2. Receive verdict plus [NEXT].
+3. Execute, inspect, simulate, or collect evidence.
+4. Paste the complete valid snapshot back.
+5. Continue through delta-only peer validation instead of restarting.
 
-## Input surfaces
+## Default profile
 
-- PLAN
-- ARTIFACT
-- TOOL plus TARGET
-- PREV
-- full previous PA_PVP snapshot as input
+- ExecCapability=NO_RUNTIME
+- ClosePolicy=SIM_OK
+- AskUser=OFF
+- CopyPasteMode=NO_LOOK
 
-## AskUser switch
+## Evidence and limits
 
-Default AskUser = OFF.
+PA_PVP distinguishes simulated closure from closure backed by historical, real, or experimental evidence.
 
-When evidence is missing, PA_PVP simulates, parks, probes, or cuts by rule.
+External facts are not current unless inspected.
 
-AskUser = ON allows one minimal operator-facing evidence request only when mechanically eligible.
+Irreversible or REAL_ONLY decisions cannot close as simulated.
 
-## Practical limits
+If the state header is missing or OutputValidity: INVALID appears, the output is diagnostic only and must not be executed or reused.
 
-PA_PVP is not a free-form brainstorming prompt.
+"PLUTONIUM-like" is a project identity and design metaphor, not a safety certification or formal verification claim.
 
-Small runs should stay short.
+## AI-assisted development
 
-Larger or riskier runs can expand only when state justifies it.
+This project was developed with AI assistance.
 
-If evidence is weak, PA_PVP should not pretend certainty.
+The project, documentation, and repository materials were shaped through human-directed work supported by AI tools during drafting, structuring, review, and refinement.
 
-If output is invalid, do not reuse it as machine state.
+AI assistance does not make the project automatically correct, complete, or suitable for every use case. Read it, test it, and adapt it to your own context.
 
 ## Discovery Set
 
 Machine-readable project files:
 
-- llms.txt: LLM-readable project index.
-- raw-manifest.json: structured machine-readable project manifest.
-- robots.txt: crawler access declaration.
-- sitemap.xml: sitemap for the GitHub Pages surface.
+- llms.txt: LLM-readable project index
+- raw-manifest.json: structured machine-readable project manifest
+- robots.txt: project-level crawler discovery companion
+- sitemap.xml: canonical HTML sitemap
 
 HTML discovery signals:
 
-- canonical URL
-- rel=alternate for llms.txt
-- rel=alternate for raw-manifest.json
-- JSON-LD SoftwareSourceCode metadata
+- absolute canonical URL
+- alternate link to llms.txt
+- alternate link to raw-manifest.json
 - Open Graph metadata
-- footer machine-readable links
+- SoftwareSourceCode JSON-LD
+- visible low-noise footer links
 
 ## Keywords
 
-decision protocol, adversarial peer validation, copy paste decision loop, clear verdicts, executable next action, bounded uncertainty, PA_PVP, PLUTONIUM-like protocol, decision closure, reality probes, reusable state
+PA_PVP, decision protocol, adversarial peer validation, copy paste protocol, decision closure, DO NOW, DO LATER, DISCARD, executable next action, reality probe, bounded uncertainty, reusable decision state

@@ -1,45 +1,39 @@
 {
   "name": "PA_PVP",
   "subtitle": "PLUTONIUM-like Adversarial Peer Validation Protocol",
-  "type": "Copy/paste decision loop",
-  "description": "A copy/paste decision protocol for clear verdicts, executable next actions, probes, and uncertainty under control.",
+  "type": "Copy/paste adversarial decision protocol",
+  "description": "Turns uncertain plans, artifacts, choices, targets, and previous states into a forced verdict, one concrete next action, and reusable machine state.",
   "url": "https://xxyoudeadpunkxx.github.io/PA_PVP-a-PLUTONIUM-like-Adversarial-Peer-Validation-Protocol/",
   "page_url": "https://xxyoudeadpunkxx.github.io/PA_PVP-a-PLUTONIUM-like-Adversarial-Peer-Validation-Protocol/",
   "repository": "https://github.com/XxYouDeaDPunKxX/PA_PVP-a-PLUTONIUM-like-Adversarial-Peer-Validation-Protocol",
+  "canonical_protocol_file": "PA_PVP_full_v9.9.0_canonical.txt",
+  "canonical_protocol_url": "https://github.com/XxYouDeaDPunKxX/PA_PVP-a-PLUTONIUM-like-Adversarial-Peer-Validation-Protocol/blob/main/PA_PVP_full_v9.9.0_canonical.txt",
   "license": "CC BY-SA 4.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "canonical_protocol_file": "PA_PVP_full_v9.9.0_canonical.txt",
-  "identity": "Close decisions. Keep moving. Doubt should generate motion, not delay.",
-  "purpose": "Take a plan, artifact, target, uncertain situation, or previous PA_PVP output and return a verdict, one executable next action, and a state that can be pasted back later.",
-  "use_case": "Use PA_PVP when a plan, artifact, target, uncertain situation, or previous PA_PVP output needs pressure-testing and closure into a concrete next move.",
-  "use_cases": [
-    "reversible choice that still needs a clean next step",
-    "decision that will not close",
-    "plan that needs pressure-testing",
-    "artifact that needs validation",
-    "project with too many possible next steps",
-    "previous PA_PVP output to continue"
+  "identity": "Doubt is not a blocker. It is a state transition.",
+  "inputs": [
+    "PLAN",
+    "ARTIFACT",
+    "TOOL plus TARGET",
+    "normal-language decision or uncertain situation",
+    "previous valid PA_PVP snapshot"
   ],
-  "output_surfaces": {
-    "machine_snapshot": {
-      "description": "One machine snapshot in a single code block.",
-      "markers": [
-        "STATE: DECISION.TEST.FINAL",
-        "[QUEUE]",
-        "[NEXT]"
-      ],
-      "reusable_state": true
+  "outputs": {
+    "verdicts": [
+      "DO NOW",
+      "DO LATER",
+      "DISCARD"
+    ],
+    "next_action": "Exactly one concrete [NEXT] action.",
+    "machine_state": {
+      "header": "STATE: DECISION.TEST.FINAL",
+      "reusable": true
     },
     "human_table": {
-      "description": "Derived-only scanning table after the code block.",
-      "reusable_state": false
+      "reusable": false,
+      "purpose": "Derived scanning surface."
     }
   },
-  "core_verdicts": [
-    "DO NOW",
-    "DO LATER",
-    "DISCARD"
-  ],
   "core_states": [
     "DRAFT",
     "ACTIVE",
@@ -49,63 +43,65 @@
     "EXPIRED",
     "DISCARDED"
   ],
-  "loop_steps": [
-    "Paste a plan, artifact, target, or current PA_PVP state.",
-    "Get the verdict and [NEXT].",
-    "Execute, simulate, or inspect the next step.",
-    "Paste the previous output back.",
-    "PA_PVP continues from the state instead of restarting from zero."
-  ],
-  "input_surfaces": [
-    "PLAN",
-    "ARTIFACT",
-    "TOOL plus TARGET",
-    "PREV",
-    "full previous PA_PVP snapshot as input"
-  ],
-  "ask_user_switch": {
-    "default": "OFF",
-    "off_behavior": "Simulates, parks, probes, or cuts by rule when evidence is missing.",
-    "on_behavior": "Allows one minimal operator-facing evidence request only when mechanically eligible."
+  "default_profile": {
+    "ExecCapability": "NO_RUNTIME",
+    "ClosePolicy": "SIM_OK",
+    "AskUser": "OFF",
+    "CopyPasteMode": "NO_LOOK"
   },
-  "practical_limits": [
-    "Not a free-form brainstorming prompt.",
-    "Small runs should stay short.",
-    "Larger or riskier runs can expand only when state justifies it.",
-    "If evidence is weak, PA_PVP should not pretend certainty.",
-    "If output is invalid, do not reuse it as machine state."
+  "continuation": [
+    "Paste an input or previous valid snapshot.",
+    "Receive verdict plus [NEXT].",
+    "Execute, inspect, simulate, or collect evidence.",
+    "Paste the complete valid snapshot back.",
+    "Continue through delta-only peer validation."
   ],
+  "limits": [
+    "Not a software runtime or autonomous agent.",
+    "Simulated evidence is not real-world evidence.",
+    "External facts are not current unless inspected.",
+    "Irreversible or REAL_ONLY decisions cannot close as simulated.",
+    "Invalid output must not be executed or reused.",
+    "PLUTONIUM-like is a project identity, not a safety certification."
+  ],
+  "development": {
+    "ai_assisted": true,
+    "statement": "Human-directed work supported by AI tools during drafting, structuring, review, and refinement."
+  },
   "discovery_set": {
-    "llms": "llms.txt",
-    "manifest": "raw-manifest.json",
-    "robots": "robots.txt",
-    "sitemap": "sitemap.xml",
-    "html_signals": [
-      "canonical URL",
-      "rel=alternate for llms.txt",
-      "rel=alternate for raw-manifest.json",
-      "JSON-LD SoftwareSourceCode metadata",
-      "Open Graph metadata",
-      "footer machine-readable links"
-    ]
+    "llms": "https://xxyoudeadpunkxx.github.io/PA_PVP-a-PLUTONIUM-like-Adversarial-Peer-Validation-Protocol/llms.txt",
+    "manifest": "https://xxyoudeadpunkxx.github.io/PA_PVP-a-PLUTONIUM-like-Adversarial-Peer-Validation-Protocol/raw-manifest.json",
+    "sitemap": "https://xxyoudeadpunkxx.github.io/PA_PVP-a-PLUTONIUM-like-Adversarial-Peer-Validation-Protocol/sitemap.xml",
+    "robots": "https://xxyoudeadpunkxx.github.io/PA_PVP-a-PLUTONIUM-like-Adversarial-Peer-Validation-Protocol/robots.txt",
+    "page_type": "PAGE",
+    "pages_type": "PROJECT_SITE",
+    "site_root": "https://xxyoudeadpunkxx.github.io/PA_PVP-a-PLUTONIUM-like-Adversarial-Peer-Validation-Protocol/",
+    "discovery_root": "https://xxyoudeadpunkxx.github.io/PA_PVP-a-PLUTONIUM-like-Adversarial-Peer-Validation-Protocol/"
   },
-  "machine_readable_files": [
-    "llms.txt",
-    "raw-manifest.json",
-    "robots.txt",
-    "sitemap.xml"
-  ],
   "keywords": [
+    "PA_PVP",
     "decision protocol",
     "adversarial peer validation",
-    "copy paste decision loop",
-    "clear verdicts",
-    "executable next action",
-    "bounded uncertainty",
-    "PA_PVP",
-    "PLUTONIUM-like protocol",
+    "copy paste protocol",
     "decision closure",
-    "reality probes",
-    "reusable state"
-  ]
+    "DO NOW",
+    "DO LATER",
+    "DISCARD",
+    "executable next action",
+    "reality probe",
+    "bounded uncertainty",
+    "reusable decision state"
+  ],
+  "deployment": {
+    "owner": "XxYouDeaDPunKxX",
+    "repo": "PA_PVP-a-PLUTONIUM-like-Adversarial-Peer-Validation-Protocol",
+    "pages_type": "PROJECT_SITE",
+    "source_branch": "gh-pages",
+    "source_path": "/",
+    "custom_domain": null,
+    "domain_root": "https://xxyoudeadpunkxx.github.io/",
+    "site_root": "https://xxyoudeadpunkxx.github.io/PA_PVP-a-PLUTONIUM-like-Adversarial-Peer-Validation-Protocol/",
+    "discovery_root": "https://xxyoudeadpunkxx.github.io/PA_PVP-a-PLUTONIUM-like-Adversarial-Peer-Validation-Protocol/",
+    "current_page_url": "https://xxyoudeadpunkxx.github.io/PA_PVP-a-PLUTONIUM-like-Adversarial-Peer-Validation-Protocol/"
+  }
 }
