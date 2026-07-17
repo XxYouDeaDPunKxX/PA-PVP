@@ -19,7 +19,7 @@
   --green: #9de4b2;
   --yellow: #ffd67d;
   --red: #ff8b85;
-  --max: 1180px;
+  --max: 1680px;
   --radius-sm: 10px;
   --radius: 18px;
   --radius-lg: 30px;
@@ -113,7 +113,7 @@ pre {
 }
 
 .shell {
-  width: min(calc(100% - 40px), var(--max));
+  width: min(calc(100% - 64px), var(--max));
   margin-inline: auto;
 }
 
